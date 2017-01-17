@@ -22,7 +22,11 @@ const hci_hal_t *hci_hal_get_interface() {
 #if HCI_USE_MCT
   return hci_hal_mct_get_interface();
 #else
-  return hci_hal_h4_get_interface();
+#ifdef BLUEDROID_ENABLE_V4L2
+		return hci_hal_v4l2_get_interface();
+#else		
+		return hci_hal_h4_get_interface();
+#endif  
 #endif
 }
 
